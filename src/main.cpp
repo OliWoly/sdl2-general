@@ -3,6 +3,7 @@
 #include <SDL2/SDL_video.h>
 #include <iostream>
 #include <SDL.h>
+#include "../include/player.h"
 
 using namespace std;
 
