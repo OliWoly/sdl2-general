@@ -11,7 +11,6 @@ using namespace std;
 // Constants..
 int SCREENWIDTH = 1280;
 int SCREENHEIGHT = 720;
-int RECT_SPEED = 20; // Speed of rectangle movement
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -36,6 +35,10 @@ int main() {
 
     // Main loop
     while (!quit) {
+        // Frame Timings. Initial Frame time.
+        auto start = std::chrono::high_resolution_clock::now();
+
+
         // Handle events
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -67,17 +70,23 @@ int main() {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        // Draw the rectangle at the updated position
-        SDL_Rect rect = {p.getX(), p.getY(), p.getW(), p.getH()};
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &rect);
+        p.draw(renderer);
 
         // Push to screen
         SDL_RenderPresent(renderer);
 
         // Optional: Delay for frame rate (e.g., ~60 FPS)
-        SDL_Delay(16);
-    }
+        //SDL_Delay(16);
+
+        // Frame Timings. End Frame Time.
+        auto end = std::chrono::high_resolution_clock::now();  // End time
+
+        auto tdelta = end - start;
+        // weird ass way of doing this.
+        std::chrono::duration<double, std::milli> ms = tdelta;
+        float fps = 1000/ms.count();
+        cout << fps << endl;
+    }// end of main loop
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

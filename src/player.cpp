@@ -1,3 +1,5 @@
+#include <SDL.h>
+#include <SDL_render.h>
 #include "../include/player.h"
 #include <iostream>
 
@@ -22,7 +24,11 @@ Player::Player(
     speed(startSpeed) 
     {}
 
-
+void Player::draw(SDL_Renderer* renderer){
+    SDL_Rect rect = {x, y, w, h};    
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(renderer, &rect);
+}
 
 void Player::stepRight(int stepSize = 0){
     if (stepSize == 0){
@@ -32,7 +38,6 @@ void Player::stepRight(int stepSize = 0){
     x += stepSize;
 }
 
-
 void Player::stepLeft(int stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
@@ -40,7 +45,6 @@ void Player::stepLeft(int stepSize = 0){
 
     x -= stepSize;
 }
-
 
 void Player::stepUp(int stepSize = 0){
     if (stepSize == 0){
@@ -50,7 +54,6 @@ void Player::stepUp(int stepSize = 0){
     y -= stepSize;
 }
 
-
 void Player::stepDown(int stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
@@ -58,6 +61,7 @@ void Player::stepDown(int stepSize = 0){
 
     y += stepSize;
 }
+
 
 void Player::setX(int newx){
     x = newx;

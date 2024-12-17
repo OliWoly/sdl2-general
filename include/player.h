@@ -1,5 +1,6 @@
 #ifndef PLAYER_H // essetntally pragma once.
 #define PLAYER_H
+#include <SDL.h>
 
 class Player {
 private:
@@ -20,6 +21,8 @@ public:
         int startSpeed = 5);
 
     // Modifiers
+    void draw(SDL_Renderer* renderer);
+
     void stepRight(int stepSize);
     void stepLeft(int stepSize);
     void stepUp(int stepSize);

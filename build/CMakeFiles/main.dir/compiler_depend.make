@@ -1027,13 +1027,16 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/AvailabilityInternalLegacy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/AvailabilityMacros.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/AvailabilityVersions.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/TargetConditionals.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/___wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/__wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/__xlocale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_abort.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_ctermid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_locale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_mb_cur_max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/_printf.h \
@@ -1791,9 +1794,11 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/exception \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/execution \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/float.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iostream \
@@ -1834,6 +1839,8 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/float.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/libkern/arm/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/limits.h \
@@ -1955,6 +1962,7 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/___wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_stdlib.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/xlocale/_string.h \
@@ -1976,10 +1984,65 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_rsize_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_size_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_wchar_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/arm_bf16.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/arm_neon.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/float.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/inttypes.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/limits.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_atomic.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_audio.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_blendmode.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_clipboard.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_config.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_config_macosx.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_cpuinfo.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_endian.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_error.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_events.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_filesystem.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_gamecontroller.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_gesture.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_guid.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_haptic.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_hidapi.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_hints.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_joystick.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_keyboard.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_keycode.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_loadso.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_locale.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_log.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_main.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_messagebox.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_metal.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_misc.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_mouse.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_mutex.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_pixels.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_platform.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_power.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_quit.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_rect.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_render.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_rwops.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_scancode.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_sensor.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_shape.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_stdinc.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_surface.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_system.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_thread.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_timer.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_touch.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_version.h \
+  /Library/Frameworks/SDL2.framework/Headers/SDL_video.h \
+  /Library/Frameworks/SDL2.framework/Headers/begin_code.h \
+  /Library/Frameworks/SDL2.framework/Headers/close_code.h \
   /Users/oli/Documents/owncode/sdl2-test-1/include/player.h
 
 
