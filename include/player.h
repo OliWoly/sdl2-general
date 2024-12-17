@@ -19,14 +19,25 @@ public:
         int startH = 0,
         int startSpeed = 5);
 
-    // Getter for X
-    int getX() const;
+    // Modifiers
+    void stepRight(int stepSize);
+    void stepLeft(int stepSize);
+    void stepUp(int stepSize);
+    void stepDown(int stepSize);
 
-    // Getter for Y
-    int getY() const;
+    // Setters
+    void setX(int newx);
+    void setY(int newx);
+
+    // Getters
+    int getX();
+    int getY();
+    int getW();
+    int getH();
+    int getSpeed();
 
     // Method to display coordinates
-    void displayCoordinates() const;
+    void displayCoordinates();
 };
 
 #endif // PLAYER_H

@@ -1,8 +1,9 @@
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_video.h>
-#include <iostream>
 #include <SDL.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL_render.h>
+#include <SDL_timer.h>
+#include <SDL_video.h>
+#include <iostream>
 #include "../include/player.h"
 
 using namespace std;
@@ -28,11 +29,7 @@ int main() {
         return 1;
     }
 
-    // Rectangle position and size
-    int rectX = SCREENWIDTH / 4;
-    int rectY = SCREENHEIGHT / 4;
-    int rectW = 200; // Width
-    int rectH = 150; // Height
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 5);
 
     bool quit = false;
     SDL_Event event;
@@ -48,16 +45,19 @@ int main() {
             else if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                     case SDLK_UP:
-                        rectY -= RECT_SPEED; // Move up
+                        p.stepUp(p.getSpeed());
                         break;
                     case SDLK_DOWN:
-                        rectY += RECT_SPEED; // Move down
+                        p.stepDown(p.getSpeed());
                         break;
                     case SDLK_LEFT:
-                        rectX -= RECT_SPEED; // Move left
+                        p.stepLeft(p.getSpeed());
                         break;
                     case SDLK_RIGHT:
-                        rectX += RECT_SPEED; // Move right
+                        p.stepRight(p.getSpeed());
+                        break;
+                    case SDLK_ESCAPE:
+                        quit = true;
                         break;
                 }
             }
@@ -68,7 +68,7 @@ int main() {
         SDL_RenderClear(renderer);
 
         // Draw the rectangle at the updated position
-        SDL_Rect rect = {rectX, rectY, rectW, rectH};
+        SDL_Rect rect = {p.getX(), p.getY(), p.getW(), p.getH()};
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &rect);
 

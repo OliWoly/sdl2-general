@@ -24,17 +24,70 @@ Player::Player(
 
 
 
-// Getter for X
-int Player::getX() const {
+void Player::stepRight(int stepSize = 0){
+    if (stepSize == 0){
+        stepSize = getSpeed();
+    }
+
+    x += stepSize;
+}
+
+
+void Player::stepLeft(int stepSize = 0){
+    if (stepSize == 0){
+        stepSize = getSpeed();
+    }
+
+    x -= stepSize;
+}
+
+
+void Player::stepUp(int stepSize = 0){
+    if (stepSize == 0){
+        stepSize = getSpeed();
+    }
+
+    y -= stepSize;
+}
+
+
+void Player::stepDown(int stepSize = 0){
+    if (stepSize == 0){
+        stepSize = getSpeed();
+    }
+
+    y += stepSize;
+}
+
+void Player::setX(int newx){
+    x = newx;
+}
+
+void Player::setY(int newx){
+    x = newx;
+}
+
+int Player::getX() {
     return x;
 }
 
-// Getter for Y
-int Player::getY() const {
+int Player::getY() {
     return y;
 }
 
+int Player::getW() {
+    return w;
+}
+
+int Player::getH() {
+    return h;
+}
+
+int Player::getSpeed() {
+    return speed;
+}
+
 // Method to display coordinates
-void Player::displayCoordinates() const {
+void Player::displayCoordinates() {
     std::cout << "Player coordinates: (" << x << ", " << y << ")" << std::endl;
 }
