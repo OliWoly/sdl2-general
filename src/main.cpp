@@ -67,20 +67,41 @@ int main() {
 
             // Handle KeyDowns:
             if (event.type == SDL_KEYDOWN){
-                if (event.key.repeat == 0) {
                     if (event.key.keysym.sym == SDLK_w) {
                         inputHandler.w_key = true;
                     }
-                }
+                    if (event.key.keysym.sym == SDLK_a) {
+                        inputHandler.a_key = true;
+                    }
+                    if (event.key.keysym.sym == SDLK_s) {
+                        inputHandler.s_key = true;
+                    }
+                    if (event.key.keysym.sym == SDLK_d) {
+                        inputHandler.d_key = true;
+                    }
+
+                    if (event.key.keysym.sym == SDLK_F3) {
+                        inputHandler.f3_key = true;
+                    }
             }
 
             // Handle KeyUps:
             if (event.type == SDL_KEYUP){
-                if (event.key.repeat == 0) {
                     if (event.key.keysym.sym == SDLK_w) {
                         inputHandler.w_key = false;
                     }
-                }
+                    if (event.key.keysym.sym == SDLK_a) {
+                        inputHandler.a_key = false;
+                    }
+                    if (event.key.keysym.sym == SDLK_s) {
+                        inputHandler.s_key = false;
+                    }
+                    if (event.key.keysym.sym == SDLK_d) {
+                        inputHandler.d_key = false;
+                    }
+                    if (event.key.keysym.sym == SDLK_F3) {
+                        inputHandler.f3_key = false;
+                    }
             }
         
         
