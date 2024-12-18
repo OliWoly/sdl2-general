@@ -68,8 +68,13 @@ int main() {
             }
             if(event.type == SDL_MOUSEMOTION)
             {
-                SDL_GetGlobalMouseState(&xMouse,&yMouse);
-                cout << xMouse << yMouse << endl;
+                // Gets the mouse position based on the entire screen not just the sdl window.
+                //SDL_GetGlobalMouseState(&xMouse,&yMouse);
+                
+                // Gets the mouse position based on just the sdl window.
+                SDL_GetMouseState(&xMouse,&yMouse);
+
+                cout << xMouse << " " << yMouse << endl;
             }
         }
 
