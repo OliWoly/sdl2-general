@@ -4,9 +4,13 @@
 #include <SDL_render.h>
 #include <SDL_timer.h>
 #include <SDL_video.h>
+
 #include <iostream>
 #include "../include/player.h"
 #include "../include/InputHandler.h"
+#include "../include/Entity.h"
+#include "../include/Collision.h"
+#include <list>
 
 using namespace std;
 
@@ -40,7 +44,7 @@ int main() {
     int xMouse, yMouse;
     int xMouseG, yMouseG;
 
-    int framerate = 8;
+    int framerate = 16;
 
     
 
@@ -53,8 +57,11 @@ int main() {
     // At bottom right before main loop.
     // This way makes sure all the vairbales have 
     // already been declared.
-    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 2, &td);
+    list<int> pcolour{255,255,255,255};
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 1, &td);
+    Entity e1(60, 40, 100, 20, &td);
     InputHandler inputHandler;
+    Collision collider;
 
 
     // Main loop
@@ -104,15 +111,19 @@ int main() {
                     }
 
                     if (event.key.keysym.sym == SDLK_8) {
-                        framerate = 33;
-                    }
-
-                    if (event.key.keysym.sym == SDLK_9) {
                         framerate = 16;
                     }
 
-                    if (event.key.keysym.sym == SDLK_0) {
+                    if (event.key.keysym.sym == SDLK_9) {
                         framerate = 8;
+                    }
+
+                    if (event.key.keysym.sym == SDLK_0) {
+                        framerate = 0;
+                    }
+
+                    if (event.key.keysym.sym == SDLK_e) {
+                        p.setColour(180, 20, 190, 255);
                     }
 
 
@@ -133,18 +144,19 @@ int main() {
                         inputHandler.d_key = false;
                     }
             }
-        
-        
         } // end of event loop.
             
 
             
         // Events based on saved inputs:
-
         inputHandler.asses(&p);
+        
 
 
-
+        collider.collidePlayer_w_Entity(&p, &e1);
+        collider.collidePlayerBoundariesScreen(&p, SCREENWIDTH, SCREENHEIGHT);
+        
+        
         // Clear screen, also refreshes the draw colour to black.
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -152,7 +164,7 @@ int main() {
         // DRAWING
         ///////////////////////////////////////////////////////////////////////
         p.draw(renderer);
-
+        e1.draw(renderer);
 
 
 
@@ -181,7 +193,7 @@ int main() {
         
 
         // set time delta to player through pointers.
-        p.setTD(ms.count());
+        td = ms.count();
         //cout << fps << endl;
 
     }// end of main loop

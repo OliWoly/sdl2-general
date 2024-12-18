@@ -230,6 +230,9 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //The directory containing a CMake configuration file for SDL2.
 SDL2_DIR:PATH=/Library/Frameworks/SDL2.framework/Resources/CMake
 
+//The directory containing a CMake configuration file for SDL2_ttf.
+SDL2_ttf_DIR:PATH=/opt/homebrew/lib/cmake/SDL2_ttf
+
 //Value Computed by CMake
 sdl2-snake_BINARY_DIR:STATIC=/Users/oli/Documents/owncode/sdl2-test-1/build
 

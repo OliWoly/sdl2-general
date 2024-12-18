@@ -2,15 +2,17 @@
 #define PLAYER_H
 #include <SDL.h>
 
+
 class Player {
 private:
     int x;  // X-coordinate
     int y;  // Y-coordinate
     int w;  // Width
     int h;  // Height
-    int speed;
+    float speed;
     float* td;  // Must dereference with * to get time delta.
                 // As in float td = *td.
+    int colour[4] = {255, 255, 255, 255};
 
 public:
     // Constructor
@@ -36,6 +38,7 @@ public:
     void setX(int newx);
     void setY(int newx);
     void setTD(float newTD);
+    void setColour(int r, int g, int b, int a);
 
     // Getters
     int getX();
@@ -43,10 +46,12 @@ public:
     int getW();
     int getH();
     int getSpeed();
+    int* getColour();
 
     // Method to display coordinates
     void displayCoordinates();
     void displayTimeDelta();
+    void displayColour();
 };
 
 #endif // PLAYER_H

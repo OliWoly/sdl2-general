@@ -2,6 +2,7 @@
 #include <SDL_render.h>
 #include "../include/player.h"
 #include <iostream>
+#include <list>
 
 using namespace std;
 
@@ -27,8 +28,8 @@ Player::Player(
     {}
 
 void Player::draw(SDL_Renderer* renderer){
-    SDL_Rect rect = {x, y, w, h};    
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_Rect rect = {*&x, *&y, *&w, *&h};    
+    SDL_SetRenderDrawColor(renderer, colour[0], colour[1], colour[2], colour[3]);
     SDL_RenderFillRect(renderer, &rect);
 }
 
@@ -72,12 +73,19 @@ void Player::setX(int newx){
     x = newx;
 }
 
-void Player::setY(int newx){
-    x = newx;
+void Player::setY(int newy){
+    y = newy;
 }
 
 void Player::setTD(float newTD){
     *td = newTD;
+}
+
+void Player::setColour(int r, int g, int b, int a){
+    colour[0] = r;
+    colour[1] = g;
+    colour[2] = b;
+    colour[3] = a;
 }
 
 int Player::getX() {
@@ -100,6 +108,10 @@ int Player::getSpeed() {
     return speed;
 }
 
+int* Player::getColour(){
+    return colour;
+}
+
 // Method to display coordinates
 void Player::displayCoordinates() {
     std::cout << "Player coordinates: (" << x << ", " << y << ")" << std::endl;
@@ -107,4 +119,8 @@ void Player::displayCoordinates() {
 
 void Player::displayTimeDelta(){
     cout << *td << endl;
+}
+
+void Player::displayColour(){
+    std::cout << colour << std::endl;
 }

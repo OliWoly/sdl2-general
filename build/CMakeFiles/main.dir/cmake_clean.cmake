@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/main.dir/src/Collision.cpp.o"
+  "CMakeFiles/main.dir/src/Collision.cpp.o.d"
+  "CMakeFiles/main.dir/src/Entity.cpp.o"
+  "CMakeFiles/main.dir/src/Entity.cpp.o.d"
   "CMakeFiles/main.dir/src/InputHandler.cpp.o"
   "CMakeFiles/main.dir/src/InputHandler.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"
