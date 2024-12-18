@@ -58,7 +58,7 @@ int main() {
     // This way makes sure all the vairbales have 
     // already been declared.
     list<int> pcolour{255,255,255,255};
-    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 1, &td);
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 1, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
     Entity e1(60, 40, 100, 20, &td);
     InputHandler inputHandler;
     Collision collider;

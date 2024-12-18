@@ -14,16 +14,26 @@ private:
                 // As in float td = *td.
     int colour[4] = {255, 255, 255, 255};
 
+    int* mouseXG;
+    int* mouseYG;
+    int* mouseXL;
+    int* mouseYL;
+
 public:
     // Constructor
     // Must change if adding new instance variables.
     Player(
-        int startX = 0, 
-        int startY = 0, 
-        int startW = 0, 
-        int startH = 0,
-        float startSpeed = 0.5,
-        float* td = 0
+        int startX, 
+        int startY, 
+        int startW, 
+        int startH,
+        float startSpeed,
+        float* td,
+
+        int* mousePosXGlobal,
+        int* mousePosYGlobal,
+        int* mousePosXLocal,
+        int* mousePosYLocal
         );
 
     // Modifiers

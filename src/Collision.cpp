@@ -26,8 +26,6 @@ bool Collision::collidePlayer_w_Entity(Player* player, Entity* entity){
         player->getX() + player->getW() > entity->getX() &&
         player->getY() < entity->getY() + entity->getH() &&
         player->getY() + player->getH() > entity->getY()) {
-        
-        std::cout << "colliding" << std::endl;
         return true;
         }
     else {

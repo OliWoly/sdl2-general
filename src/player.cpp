@@ -2,7 +2,6 @@
 #include <SDL_render.h>
 #include "../include/player.h"
 #include <iostream>
-#include <list>
 
 using namespace std;
 
@@ -16,16 +15,26 @@ Player::Player(
     int startW, 
     int startH,
     float startSpeed,
-    float* initialTD
+    float* initialTD,
+    
+    int* mousePosXGlobal,
+    int* mousePosYGlobal,
+    int* mousePosXLocal,
+    int* mousePosYLocal
     ) 
-    : 
-    x(startX), 
-    y(startY), 
-    w(startW), 
-    h(startH),
-    speed(startSpeed),
-    td(initialTD)
-    {}
+    {
+        x = startX;
+        y = startY;
+        w = startW;
+        h = startH;
+        speed = startSpeed;
+        td = initialTD;
+
+        mouseXG = mousePosXGlobal;
+        mouseYG = mousePosYGlobal;
+        mouseXL = mousePosXLocal;
+        mouseYL = mousePosYLocal;
+    }
 
 void Player::draw(SDL_Renderer* renderer){
     SDL_Rect rect = {*&x, *&y, *&w, *&h};    
