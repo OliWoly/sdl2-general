@@ -15,6 +15,7 @@ int SCREENWIDTH = 1280;
 int SCREENHEIGHT = 720;
 
 int main() {
+    // SDL Initialisation.
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL initialization failed: " << SDL_GetError() << std::endl;
         return 1;
@@ -24,13 +25,14 @@ int main() {
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
 
+    // Further SDL Initialisation.
     if (SDL_CreateWindowAndRenderer(SCREENWIDTH, SCREENHEIGHT, 0, &window, &renderer) != 0) {
         std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
         SDL_Quit();
         return 1;
     }
 
-    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 5);
+
 
     bool quit = false;
     SDL_Event event;
@@ -38,9 +40,22 @@ int main() {
     int xMouse, yMouse;
     int xMouseG, yMouseG;
 
-    InputHandler inputHandler;
+    int framerate = 8;
+
+    
 
     bool wKeyPressed = false;
+
+    // Time delta.
+    float td;
+
+    // Class Inits.
+    // At bottom right before main loop.
+    // This way makes sure all the vairbales have 
+    // already been declared.
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 2, &td);
+    InputHandler inputHandler;
+
 
     // Main loop
     while (!quit) {
@@ -85,8 +100,22 @@ int main() {
                     }
 
                     if (event.key.keysym.sym == SDLK_ESCAPE) {
-                        quit = true;;
+                        quit = true;
                     }
+
+                    if (event.key.keysym.sym == SDLK_8) {
+                        framerate = 33;
+                    }
+
+                    if (event.key.keysym.sym == SDLK_9) {
+                        framerate = 16;
+                    }
+
+                    if (event.key.keysym.sym == SDLK_0) {
+                        framerate = 8;
+                    }
+
+
             }
 
             // Handle KeyUps:
@@ -136,9 +165,12 @@ int main() {
 
 
 
+
         ///////////////////////////////////////////////////////////////////////
         // Push to screen
         SDL_RenderPresent(renderer);
+
+        SDL_Delay(framerate);
 
         // Frame Timings. End Frame Time.
         auto end = std::chrono::high_resolution_clock::now();  // End time
@@ -146,7 +178,12 @@ int main() {
         // weird ass way of doing this.
         std::chrono::duration<double, std::milli> ms = tdelta;
         float fps = 1000/ms.count();
+        
+
+        // set time delta to player through pointers.
+        p.setTD(ms.count());
         //cout << fps << endl;
+
     }// end of main loop
 
     // On program quit.

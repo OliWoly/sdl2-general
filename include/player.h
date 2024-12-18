@@ -9,6 +9,8 @@ private:
     int w;  // Width
     int h;  // Height
     int speed;
+    float* td;  // Must dereference with * to get time delta.
+                // As in float td = *td.
 
 public:
     // Constructor
@@ -18,7 +20,9 @@ public:
         int startY = 0, 
         int startW = 0, 
         int startH = 0,
-        int startSpeed = 5);
+        float startSpeed = 0.5,
+        float* td = 0
+        );
 
     // Modifiers
     void draw(SDL_Renderer* renderer);
@@ -31,6 +35,7 @@ public:
     // Setters
     void setX(int newx);
     void setY(int newx);
+    void setTD(float newTD);
 
     // Getters
     int getX();
@@ -41,6 +46,7 @@ public:
 
     // Method to display coordinates
     void displayCoordinates();
+    void displayTimeDelta();
 };
 
 #endif // PLAYER_H

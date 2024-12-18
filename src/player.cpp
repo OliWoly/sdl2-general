@@ -14,14 +14,16 @@ Player::Player(
     int startY, 
     int startW, 
     int startH,
-    int startSpeed
+    float startSpeed,
+    float* initialTD
     ) 
     : 
     x(startX), 
     y(startY), 
     w(startW), 
     h(startH),
-    speed(startSpeed) 
+    speed(startSpeed),
+    td(initialTD)
     {}
 
 void Player::draw(SDL_Renderer* renderer){
@@ -34,8 +36,8 @@ void Player::stepRight(int stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
-
-    x += stepSize;
+    float realtd = *td;
+    x += (stepSize * realtd);
 }
 
 void Player::stepLeft(int stepSize = 0){
@@ -43,7 +45,8 @@ void Player::stepLeft(int stepSize = 0){
         stepSize = getSpeed();
     }
 
-    x -= stepSize;
+    float realtd = *td;
+    x -= (stepSize * realtd);
 }
 
 void Player::stepUp(int stepSize = 0){
@@ -51,7 +54,8 @@ void Player::stepUp(int stepSize = 0){
         stepSize = getSpeed();
     }
 
-    y -= stepSize;
+    float realtd = *td;
+    y -= (stepSize * realtd);
 }
 
 void Player::stepDown(int stepSize = 0){
@@ -59,7 +63,8 @@ void Player::stepDown(int stepSize = 0){
         stepSize = getSpeed();
     }
 
-    y += stepSize;
+    float realtd = *td;
+    y += (stepSize * realtd);
 }
 
 
@@ -69,6 +74,10 @@ void Player::setX(int newx){
 
 void Player::setY(int newx){
     x = newx;
+}
+
+void Player::setTD(float newTD){
+    *td = newTD;
 }
 
 int Player::getX() {
@@ -94,4 +103,8 @@ int Player::getSpeed() {
 // Method to display coordinates
 void Player::displayCoordinates() {
     std::cout << "Player coordinates: (" << x << ", " << y << ")" << std::endl;
+}
+
+void Player::displayTimeDelta(){
+    cout << *td << endl;
 }
