@@ -1,10 +1,12 @@
 #include <SDL.h>
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL_render.h>
 #include <SDL_timer.h>
 #include <SDL_video.h>
 #include <iostream>
 #include "../include/player.h"
+#include "../include/InputHandler.h"
 
 using namespace std;
 
@@ -34,6 +36,11 @@ int main() {
     SDL_Event event;
 
     int xMouse, yMouse;
+    int xMouseG, yMouseG;
+
+    InputHandler inputHandler;
+
+    bool wKeyPressed = false;
 
     // Main loop
     while (!quit) {
@@ -46,62 +53,70 @@ int main() {
             if (event.type == SDL_QUIT) {
                 quit = true;
             } 
-            // Handle key press events
-            if (event.type == SDL_KEYDOWN) {
-                switch (event.key.keysym.sym) {
-                    case SDLK_UP:
-                        p.stepUp(p.getSpeed());
-                        break;
-                    case SDLK_DOWN:
-                        p.stepDown(p.getSpeed());
-                        break;
-                    case SDLK_LEFT:
-                        p.stepLeft(p.getSpeed());
-                        break;
-                    case SDLK_RIGHT:
-                        p.stepRight(p.getSpeed());
-                        break;
-                    case SDLK_ESCAPE:
-                        quit = true;
-                        break;
-                }
-            }
+
+            // Mouse Inputs.
             if(event.type == SDL_MOUSEMOTION)
             {
                 // Gets the mouse position based on the entire screen not just the sdl window.
-                //SDL_GetGlobalMouseState(&xMouse,&yMouse);
-                
+                SDL_GetGlobalMouseState(&xMouseG,&yMouseG);
                 // Gets the mouse position based on just the sdl window.
                 SDL_GetMouseState(&xMouse,&yMouse);
-
-                cout << xMouse << " " << yMouse << endl;
+                //cout << xMouse << " " << yMouse << endl;
             }
-        }
 
-        // Clear screen
+
+            // Handle KeyDowns:
+            if (event.type == SDL_KEYDOWN){
+                if (event.key.repeat == 0) {
+                    if (event.key.keysym.sym == SDLK_w) {
+                        inputHandler.w_key = true;
+                    }
+                }
+            }
+
+            // Handle KeyUps:
+            if (event.type == SDL_KEYUP){
+                if (event.key.repeat == 0) {
+                    if (event.key.keysym.sym == SDLK_w) {
+                        inputHandler.w_key = false;
+                    }
+                }
+            }
+        
+        
+        } // end of event loop.
+            
+
+            
+        // Events based on saved inputs:
+
+        inputHandler.asses(&p);
+
+
+
+        // Clear screen, also refreshes the draw colour to black.
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
+        // DRAWING
+        ///////////////////////////////////////////////////////////////////////
         p.draw(renderer);
 
+
+
+
+
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////
         // Push to screen
         SDL_RenderPresent(renderer);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // Frame Timings. End Frame Time.
         auto end = std::chrono::high_resolution_clock::now();  // End time
@@ -112,6 +127,7 @@ int main() {
         //cout << fps << endl;
     }// end of main loop
 
+    // On program quit.
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

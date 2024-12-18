@@ -3,7 +3,7 @@
 #include "../include/player.h"
 #include <iostream>
 
-
+using namespace std;
 
 // Constructor
 // Controls isntance variables and default values when calling the function.

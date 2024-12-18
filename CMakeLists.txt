@@ -12,7 +12,7 @@ set(CMAKE_PREFIX_PATH "/opt/homebrew")
 find_package(SDL2 REQUIRED)
 
 # Add the executable
-add_executable(main src/main.cpp src/player.cpp)
+add_executable(main src/main.cpp src/player.cpp src/InputHandler.cpp)
 
 # Include SDL2 headers
 target_include_directories(main PUBLIC 
