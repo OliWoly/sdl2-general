@@ -81,7 +81,11 @@ int main() {
                     }
 
                     if (event.key.keysym.sym == SDLK_F3) {
-                        inputHandler.f3_key = true;
+                        inputHandler.displayAllCurrentStates();
+                    }
+
+                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                        quit = true;;
                     }
             }
 
@@ -98,9 +102,6 @@ int main() {
                     }
                     if (event.key.keysym.sym == SDLK_d) {
                         inputHandler.d_key = false;
-                    }
-                    if (event.key.keysym.sym == SDLK_F3) {
-                        inputHandler.f3_key = false;
                     }
             }
         

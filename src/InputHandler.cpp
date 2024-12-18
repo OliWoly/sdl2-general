@@ -13,8 +13,6 @@ void InputHandler::asses(Player *player){
     check_a_key(player);
     check_s_key(player);
     check_d_key(player);
-
-    check_f3_key(player);
 }
 
 // What to do when W key is pressed.
@@ -52,10 +50,10 @@ void InputHandler::check_f3_key(Player *player){
 }
 
 void InputHandler::displayAllCurrentStates(){
-    cout << w_key << endl;
-    cout << a_key << endl;
-    cout << s_key << endl;
-    cout << d_key << endl;
+    cout << "W: " << w_key << endl;
+    cout << "A: " << a_key << endl;
+    cout << "S: " << s_key << endl;
+    cout << "D: " << d_key << endl;
 }
 
 
