@@ -33,6 +33,8 @@ int main() {
     bool quit = false;
     SDL_Event event;
 
+    int xMouse, yMouse;
+
     // Main loop
     while (!quit) {
         // Frame Timings. Initial Frame time.
@@ -45,7 +47,7 @@ int main() {
                 quit = true;
             } 
             // Handle key press events
-            else if (event.type == SDL_KEYDOWN) {
+            if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                     case SDLK_UP:
                         p.stepUp(p.getSpeed());
@@ -64,6 +66,11 @@ int main() {
                         break;
                 }
             }
+            if(event.type == SDL_MOUSEMOTION)
+            {
+                SDL_GetGlobalMouseState(&xMouse,&yMouse);
+                cout << xMouse << yMouse << endl;
+            }
         }
 
         // Clear screen
@@ -75,17 +82,29 @@ int main() {
         // Push to screen
         SDL_RenderPresent(renderer);
 
-        // Optional: Delay for frame rate (e.g., ~60 FPS)
-        //SDL_Delay(16);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Frame Timings. End Frame Time.
         auto end = std::chrono::high_resolution_clock::now();  // End time
-
         auto tdelta = end - start;
         // weird ass way of doing this.
         std::chrono::duration<double, std::milli> ms = tdelta;
         float fps = 1000/ms.count();
-        cout << fps << endl;
+        //cout << fps << endl;
     }// end of main loop
 
     SDL_DestroyRenderer(renderer);
