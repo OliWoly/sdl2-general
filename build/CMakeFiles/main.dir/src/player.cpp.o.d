@@ -373,6 +373,9 @@ CMakeFiles/main.dir/src/player.cpp.o: \
   /Library/Frameworks/SDL2.framework/Headers/SDL_locale.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL_misc.h \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/player.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/Collision.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/player.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/Entity.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__fwd/ios.h \

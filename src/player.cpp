@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_render.h>
 #include "../include/player.h"
+#include "../include/Collision.h"
 #include <iostream>
 #include <math.h>
 
@@ -49,8 +50,12 @@ void Player::moveToMouse(int stepSize = 0){
     // Angle in radians
     float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
 
+    if (!Collision::collideTwoPoints(centreX, centreY, (float)*mouseXL, (float)*mouseYL, 2)){
     x += cos(angle) * speed * *td;
     y += sin(angle) * speed * *td;
+    }
+
+
 
     //std::cout << angle * 180 / 3.1415 << std::endl;
 }
@@ -131,6 +136,14 @@ int Player::getSpeed() {
 
 int* Player::getColour(){
     return colour;
+}
+
+float Player::getMouseXL(){
+    return (float)*mouseXL; 
+}
+
+float Player::getMouseYL(){
+    return (float)*mouseYL; 
 }
 
 void Player::displayCoordinates() {

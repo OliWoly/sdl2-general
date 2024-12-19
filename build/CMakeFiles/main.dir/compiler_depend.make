@@ -4473,6 +4473,9 @@ CMakeFiles/main.dir/src/player.cpp.o: /Users/oli/Documents/owncode/sdl2-test-1/s
   /Library/Frameworks/SDL2.framework/Headers/SDL_video.h \
   /Library/Frameworks/SDL2.framework/Headers/begin_code.h \
   /Library/Frameworks/SDL2.framework/Headers/close_code.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/include/Entity.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/include/player.h \
+  /Users/oli/Documents/owncode/sdl2-test-1/include/Collision.h \
   /Users/oli/Documents/owncode/sdl2-test-1/include/player.h
 
 

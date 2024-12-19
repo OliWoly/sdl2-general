@@ -11,8 +11,9 @@ public:
     float modifier;
     Collision();
 
-    bool collidePlayer_w_Entity(Player* player, Entity* entity);
-    void collidePlayerBoundariesScreen(Player* player, int maxWidth, int maxHeight);
+    static bool collideTwoPoints(float p1x, float p1y, float p2x, float p2y, float threshold);
+    static bool collidePlayer_w_Entity(Player* player, Entity* entity);
+    static void collidePlayerBoundariesScreen(Player* player, int maxWidth, int maxHeight);
     void displayModifier();
 };
 

@@ -58,6 +58,8 @@ public:
     int getH();
     int getSpeed();
     int* getColour();
+    float getMouseXL();
+    float getMouseYL();
 
     // Method to display coordinates
     void displayCoordinates();

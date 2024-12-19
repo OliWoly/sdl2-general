@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include <SDL.h>
 #include <SDL2/SDL_hints.h>
 #include "../include/player.h"
@@ -6,22 +7,23 @@
 #include "../include/Collision.h"
 
 Collision::Collision(){
-    modifier = 1;
+    modifier = 0;
+}
+
+bool Collision::collideTwoPoints(float p1x, float p1y, float p2x, float p2y, float threshold){
+    // Distance formula
+    float distance = sqrt(pow(p2x-p1x, 2) + pow(p2y-p1y, 2));
+
+    if (distance < threshold){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool Collision::collidePlayer_w_Entity(Player* player, Entity* entity){
-    // Abstraction
-    int p_tl = player->getX();
-    int p_tr = player->getX() + player->getW();
-    int p_br = player->getY() + player->getW();
-    int p_bl = player->getY() + player->getH();
-
-    int e_tl = entity->getX();
-    int e_tr = entity->getX() + entity->getW();
-    int e_br = entity->getY() + entity->getW();
-    int e_bl = entity->getY() + entity->getH();
-
-
+    // Pure check.
     if (player->getX() < entity->getX() + entity->getW() &&
         player->getX() + player->getW() > entity->getX() &&
         player->getY() < entity->getY() + entity->getH() &&

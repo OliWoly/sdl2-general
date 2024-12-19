@@ -56,7 +56,7 @@ int main() {
     // At bottom right before main loop.
     // This way makes sure all the vairbales have 
     // already been declared.
-    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 1, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 0.3, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
     Entity e1(60, 40, 100, 20, &td);
     InputHandler inputHandler;
     Collision collider;
@@ -158,9 +158,11 @@ int main() {
         
 
 
-        collider.collidePlayer_w_Entity(&p, &e1);
-        collider.collidePlayerBoundariesScreen(&p, SCREENWIDTH, SCREENHEIGHT);
-        p.displayCoordinates();
+        Collision::collidePlayer_w_Entity(&p, &e1);
+        Collision::collidePlayerBoundariesScreen(&p, SCREENWIDTH, SCREENHEIGHT);
+
+        collider.collideTwoPoints((p.getX()+((float)p.getW()/2)), (p.getY() + ((float)p.getH()/2)),p.getMouseXL(), p.getMouseYL(), 2);
+        //p.displayCoordinates();
         
         
         // Clear screen, also refreshes the draw colour to black.
