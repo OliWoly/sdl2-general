@@ -10,7 +10,7 @@ class Collision{
 public:
     float modifier;
     Collision();
-
+    static float distanceBetweenPoints(float p1x, float p1y, float p2x, float p2y);
     static bool collideTwoPoints(float p1x, float p1y, float p2x, float p2y, float threshold);
     static bool collidePlayer_w_Entity(Player* player, Entity* entity);
     static void collidePlayerBoundariesScreen(Player* player, int maxWidth, int maxHeight);

@@ -39,11 +39,11 @@ public:
     // Modifiers
     void draw(SDL_Renderer* renderer);
 
-    void moveToMouse(int stepSize);
-    void stepRight(int stepSize);
-    void stepLeft(int stepSize);
-    void stepUp(int stepSize);
-    void stepDown(int stepSize);
+    void moveToMouse(float stepSize);
+    void stepRight(float stepSize);
+    void stepLeft(float stepSize);
+    void stepUp(float stepSize);
+    void stepDown(float stepSize);
 
     // Setters
     void setX(int newx);
@@ -56,7 +56,7 @@ public:
     int getY();
     int getW();
     int getH();
-    int getSpeed();
+    float getSpeed();
     int* getColour();
     float getMouseXL();
     float getMouseYL();

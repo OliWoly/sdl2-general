@@ -44,31 +44,38 @@ void Player::draw(SDL_Renderer* renderer){
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void Player::moveToMouse(int stepSize = 0){
+void Player::moveToMouse(float stepSize = 0){
     float centreX = (float)x + ((float)w/2);
     float centreY = (float)y + ((float)h/2);
     // Angle in radians
     float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
 
+    // Only move if the mouse is a threshold distance away from the player.
+    // Makes sure to not cause jankiness.
+    // If confused, set "threshold" to 0.
     if (!Collision::collideTwoPoints(centreX, centreY, (float)*mouseXL, (float)*mouseYL, 2)){
     x += cos(angle) * speed * *td;
     y += sin(angle) * speed * *td;
     }
+    // Only move required distance to reach destination.
+    // Avoid too big movements and floors them to distance between points.
+    else{
 
-
-
+    }
     //std::cout << angle * 180 / 3.1415 << std::endl;
 }
 
-void Player::stepRight(int stepSize = 0){
+void Player::stepRight(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
     float realtd = *td;
+
+    std::cout << stepSize << ", " << realtd << ", " << stepSize*realtd << std::endl;
     x += (stepSize * realtd);
 }
 
-void Player::stepLeft(int stepSize = 0){
+void Player::stepLeft(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
@@ -77,7 +84,7 @@ void Player::stepLeft(int stepSize = 0){
     x -= (stepSize * realtd);
 }
 
-void Player::stepUp(int stepSize = 0){
+void Player::stepUp(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
@@ -86,7 +93,7 @@ void Player::stepUp(int stepSize = 0){
     y -= (stepSize * realtd);
 }
 
-void Player::stepDown(int stepSize = 0){
+void Player::stepDown(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
@@ -130,7 +137,7 @@ int Player::getH() {
     return h;
 }
 
-int Player::getSpeed() {
+float Player::getSpeed() {
     return speed;
 }
 

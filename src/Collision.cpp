@@ -11,10 +11,8 @@ Collision::Collision(){
 }
 
 bool Collision::collideTwoPoints(float p1x, float p1y, float p2x, float p2y, float threshold){
-    // Distance formula
-    float distance = sqrt(pow(p2x-p1x, 2) + pow(p2y-p1y, 2));
-
-    if (distance < threshold){
+    // returns true if the distance between two points is less than the threshold.
+    if (Collision::distanceBetweenPoints(p1x, p1y, p2x, p2y) < threshold){
         return true;
     }
     else{
@@ -55,6 +53,13 @@ void Collision::collidePlayerBoundariesScreen(Player* player, int maxWidth, int 
     if (player->getY() > maxDown){
         player->setY(maxDown);
     }
+}
+
+float Collision::distanceBetweenPoints(float p1x, float p1y, float p2x, float p2y){
+    // Distance forumula
+    // https://www.google.com/search?client=firefox-b-d&q=distance+forumla
+    float distance = sqrt(pow(p2x-p1x, 2) + pow(p2y-p1y, 2));
+    return distance;
 }
 
 void Collision::displayModifier(){
