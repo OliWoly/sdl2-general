@@ -48,7 +48,7 @@ void Player::moveToMouse(int stepSize = 0){
     float centreY = (float)y + ((float)h/2);
     // Angle in radians
     float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
-
+    
     x += cos(angle) * speed * *td;
     y += sin(angle) * speed * *td;
 

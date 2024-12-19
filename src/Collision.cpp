@@ -54,3 +54,7 @@ void Collision::collidePlayerBoundariesScreen(Player* player, int maxWidth, int 
         player->setY(maxDown);
     }
 }
+
+void Collision::displayModifier(){
+    std::cout << modifier << std::endl;
+}

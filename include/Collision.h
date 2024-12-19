@@ -13,6 +13,7 @@ public:
 
     bool collidePlayer_w_Entity(Player* player, Entity* entity);
     void collidePlayerBoundariesScreen(Player* player, int maxWidth, int maxHeight);
+    void displayModifier();
 };
 
 

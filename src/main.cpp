@@ -10,8 +10,6 @@
 #include "../include/InputHandler.h"
 #include "../include/Entity.h"
 #include "../include/Collision.h"
-#include <list>
-#include <utility>
 
 using namespace std;
 
@@ -58,7 +56,6 @@ int main() {
     // At bottom right before main loop.
     // This way makes sure all the vairbales have 
     // already been declared.
-    list<int> pcolour{255,255,255,255};
     Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 1, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
     Entity e1(60, 40, 100, 20, &td);
     InputHandler inputHandler;

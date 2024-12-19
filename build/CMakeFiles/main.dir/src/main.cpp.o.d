@@ -1024,5 +1024,4 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/player.h \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/Entity.h \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/Collision.h \
-  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/Entity.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/list
+  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/Entity.h
