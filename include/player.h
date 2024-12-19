@@ -5,10 +5,10 @@
 
 class Player {
 private:
-    int x;  // X-coordinate
-    int y;  // Y-coordinate
-    int w;  // Width
-    int h;  // Height
+    float x;  // X-coordinate
+    float y;  // Y-coordinate
+    float w;  // Width
+    float h;  // Height
     float speed;
     float* td;  // Must dereference with * to get time delta.
                 // As in float td = *td.

@@ -38,7 +38,7 @@ Player::Player(
     }
 
 void Player::draw(SDL_Renderer* renderer){
-    SDL_Rect rect = {*&x, *&y, *&w, *&h};    
+    SDL_Rect rect = {(int)x, (int)y, (int)w, (int)h};    
     SDL_SetRenderDrawColor(renderer, colour[0], colour[1], colour[2], colour[3]);
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -48,7 +48,7 @@ void Player::moveToMouse(int stepSize = 0){
     float centreY = (float)y + ((float)h/2);
     // Angle in radians
     float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
-    
+
     x += cos(angle) * speed * *td;
     y += sin(angle) * speed * *td;
 

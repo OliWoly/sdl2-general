@@ -160,6 +160,7 @@ int main() {
 
         collider.collidePlayer_w_Entity(&p, &e1);
         collider.collidePlayerBoundariesScreen(&p, SCREENWIDTH, SCREENHEIGHT);
+        p.displayCoordinates();
         
         
         // Clear screen, also refreshes the draw colour to black.

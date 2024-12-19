@@ -5,10 +5,10 @@
 
 class Entity {
 public:
-    int x;
-    int y;
-    int w;
-    int h;
+    float x;
+    float y;
+    float w;
+    float h;
     float* td;
 
     // Functions:

@@ -13,7 +13,7 @@ Entity::Entity(int startX, int startY, int startW, int startH, float* startTD){
 
 void Entity::draw(SDL_Renderer* renderer){
     // Pass through as pointers.
-    SDL_Rect rect = {*&x, *&y, *&w, *&h};    
+    SDL_Rect rect = {(int)x, (int)y, (int)w, (int)h};    
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
     SDL_RenderFillRect(renderer, &rect);
 }
