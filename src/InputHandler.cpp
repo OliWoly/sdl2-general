@@ -13,6 +13,8 @@ void InputHandler::asses(Player *player){
     check_a_key(player);
     check_s_key(player);
     check_d_key(player);
+
+    check_space_key(player);
 }
 
 // What to do when W key is pressed.
@@ -46,6 +48,12 @@ void InputHandler::check_d_key(Player *player){
 void InputHandler::check_f3_key(Player *player){
     if (f3_key == true){
         displayAllCurrentStates();
+    }
+}
+
+void InputHandler::check_space_key(Player *player){
+    if (space_key == true){
+        player->moveToMouse(player->getSpeed());
     }
 }
 

@@ -39,6 +39,7 @@ public:
     // Modifiers
     void draw(SDL_Renderer* renderer);
 
+    void moveToMouse(int stepSize);
     void stepRight(int stepSize);
     void stepLeft(int stepSize);
     void stepUp(int stepSize);
@@ -62,6 +63,7 @@ public:
     void displayCoordinates();
     void displayTimeDelta();
     void displayColour();
+    void displayMouseCoordinates();
 };
 
 #endif // PLAYER_H

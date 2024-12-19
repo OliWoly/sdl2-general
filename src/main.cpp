@@ -11,6 +11,7 @@
 #include "../include/Entity.h"
 #include "../include/Collision.h"
 #include <list>
+#include <utility>
 
 using namespace std;
 
@@ -126,6 +127,10 @@ int main() {
                         p.setColour(180, 20, 190, 255);
                     }
 
+                    if (event.key.keysym.sym == SDLK_SPACE) {
+                        inputHandler.space_key = true;
+                    }
+
 
             }
 
@@ -142,6 +147,9 @@ int main() {
                     }
                     if (event.key.keysym.sym == SDLK_d) {
                         inputHandler.d_key = false;
+                    }
+                    if (event.key.keysym.sym == SDLK_SPACE) {
+                        inputHandler.space_key = false;
                     }
             }
         } // end of event loop.

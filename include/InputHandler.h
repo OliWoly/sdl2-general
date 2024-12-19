@@ -13,6 +13,7 @@ public:
     
     bool f3_key = false;
     bool esc_key = false;
+    bool space_key = false;
 
     // FUNCTIONS:
     // Constructor
@@ -25,6 +26,7 @@ public:
     void check_s_key(Player *player);
     void check_d_key(Player *player);
     void check_f3_key(Player *player);
+    void check_space_key(Player *player);
 
     void displayAllCurrentStates();
 };

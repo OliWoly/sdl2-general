@@ -2,6 +2,7 @@
 #include <SDL_render.h>
 #include "../include/player.h"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -42,6 +43,18 @@ void Player::draw(SDL_Renderer* renderer){
     SDL_RenderFillRect(renderer, &rect);
 }
 
+void Player::moveToMouse(int stepSize = 0){
+    float centreX = (float)x + ((float)w/2);
+    float centreY = (float)y + ((float)h/2);
+    // Angle in radians
+    float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
+
+    x += cos(angle) * speed * *td;
+    y += sin(angle) * speed * *td;
+
+    //std::cout << angle * 180 / 3.1415 << std::endl;
+}
+
 void Player::stepRight(int stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
@@ -76,7 +89,6 @@ void Player::stepDown(int stepSize = 0){
     float realtd = *td;
     y += (stepSize * realtd);
 }
-
 
 void Player::setX(int newx){
     x = newx;
@@ -121,7 +133,6 @@ int* Player::getColour(){
     return colour;
 }
 
-// Method to display coordinates
 void Player::displayCoordinates() {
     std::cout << "Player coordinates: (" << x << ", " << y << ")" << std::endl;
 }
@@ -132,4 +143,8 @@ void Player::displayTimeDelta(){
 
 void Player::displayColour(){
     std::cout << colour << std::endl;
+}
+
+void Player::displayMouseCoordinates(){
+    std::cout << *mouseXL << ", " << *mouseYL << std::endl;
 }
