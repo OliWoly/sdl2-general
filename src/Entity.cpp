@@ -3,7 +3,7 @@
 
 
 // Constructor
-Entity::Entity(int startX, int startY, int startW, int startH, float* startTD){
+Entity::Entity(float startX, float startY, float startW, float startH, float* startTD){
     x = startX;
     y = startY;
     w = startW;
@@ -18,18 +18,18 @@ void Entity::draw(SDL_Renderer* renderer){
     SDL_RenderFillRect(renderer, &rect);
 }
 
-int Entity::getX() {
+float Entity::getX() {
     return x;
 }
 
-int Entity::getY() {
+float Entity::getY() {
     return y;
 }
 
-int Entity::getW() {
+float Entity::getW() {
     return w;
 }
 
-int Entity::getH() {
+float Entity::getH() {
     return h;
 }

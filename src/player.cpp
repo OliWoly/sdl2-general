@@ -60,46 +60,38 @@ void Player::moveToMouse(float stepSize = 0){
     // Only move required distance to reach destination.
     // Avoid too big movements and floors them to distance between points.
     else{
-
+        // Just move to mouse
+        x = *mouseXL + (x-centreX);
+        y = *mouseYL + (y-centreY);
     }
-    //std::cout << angle * 180 / 3.1415 << std::endl;
 }
 
 void Player::stepRight(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
-    float realtd = *td;
-
-    std::cout << stepSize << ", " << realtd << ", " << stepSize*realtd << std::endl;
-    x += (stepSize * realtd);
+    x += (stepSize * *td);
 }
 
 void Player::stepLeft(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
-
-    float realtd = *td;
-    x -= (stepSize * realtd);
+    x -= (stepSize * *td);
 }
 
 void Player::stepUp(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
-
-    float realtd = *td;
-    y -= (stepSize * realtd);
+    y -= (stepSize * *td);
 }
 
 void Player::stepDown(float stepSize = 0){
     if (stepSize == 0){
         stepSize = getSpeed();
     }
-
-    float realtd = *td;
-    y += (stepSize * realtd);
+    y += (stepSize * *td);
 }
 
 void Player::setX(int newx){

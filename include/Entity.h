@@ -14,12 +14,13 @@ public:
     // Functions:
     // Class Methods
 
-    Entity(int startX, int startY, int startW, int startH, float* startTD);
+    Entity() = default;
+    Entity(float startX, float startY, float startW, float startH, float* startTD);
     void draw(SDL_Renderer* renderer);
-    int getX();
-    int getY();
-    int getW();
-    int getH();
+    float getX();
+    float getY();
+    float getW();
+    float getH();
 };
 
 

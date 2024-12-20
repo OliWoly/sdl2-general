@@ -5,11 +5,13 @@
 #include <SDL_timer.h>
 #include <SDL_video.h>
 
+#include <vector>
 #include <iostream>
 #include "../include/player.h"
 #include "../include/InputHandler.h"
 #include "../include/Entity.h"
 #include "../include/Collision.h"
+#include "Spawner.h"
 
 using namespace std;
 
@@ -56,11 +58,14 @@ int main() {
     // At bottom right before main loop.
     // This way makes sure all the vairbales have 
     // already been declared.
-    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 0.3, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
-    Entity e1(60, 40, 100, 20, &td);
+    Spawner spawner(&td, &SCREENWIDTH, &SCREENHEIGHT);
+    Player p(SCREENWIDTH/2, SCREENHEIGHT/2, 20, 20, 0.1, &td, &xMouseG, &yMouseG, &xMouse, &yMouse);
+    
     InputHandler inputHandler;
     Collision collider;
 
+    vector<Entity> enemies;
+    enemies.push_back(Entity(60, 40, 100, 20, &td));
 
     // Main loop
     while (!quit) {
@@ -121,7 +126,7 @@ int main() {
                     }
 
                     if (event.key.keysym.sym == SDLK_e) {
-                        p.setColour(180, 20, 190, 255);
+                        spawner.spawnEnemies(enemies, 1);
                     }
 
                     if (event.key.keysym.sym == SDLK_SPACE) {
@@ -157,8 +162,7 @@ int main() {
         inputHandler.asses(&p);
         
 
-
-        Collision::collidePlayer_w_Entity(&p, &e1);
+        
         Collision::collidePlayerBoundariesScreen(&p, SCREENWIDTH, SCREENHEIGHT);
 
         collider.collideTwoPoints((p.getX()+((float)p.getW()/2)), (p.getY() + ((float)p.getH()/2)),p.getMouseXL(), p.getMouseYL(), 2);
@@ -172,7 +176,10 @@ int main() {
         // DRAWING
         ///////////////////////////////////////////////////////////////////////
         p.draw(renderer);
-        e1.draw(renderer);
+
+        for (auto enemy : enemies){
+            enemy.draw(renderer);
+        }
 
 
 
