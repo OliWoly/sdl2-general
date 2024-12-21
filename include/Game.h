@@ -26,9 +26,11 @@ private:
     // Framerate independancy.
     // Always pass through functions other class constructors as a pointer.
     float td;
+    std::atomic<float> tdA; // Atomic.
     int xMouse, yMouse;
     int xMouseG, yMouseG;
     float framerate;
+    std::mutex mtx;  // Mutex to protect shared data access
 
 
     void closeGameWithOS(SDL_Event* event);
@@ -53,8 +55,8 @@ public:
     int getScreenWidth();
     int getScreenHeight();
 
-
-
+    void printValue(float value);
+    void printTimeDeltaEverySecond();
 };
 
 

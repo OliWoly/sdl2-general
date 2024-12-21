@@ -6,6 +6,8 @@
 #include <SDL_timer.h>
 #include <SDL_video.h>
 #include <vector>
+#include <thread>
+#include <chrono>
 
 #include "../include/Game.h"
 #include "../include/player.h"
@@ -14,13 +16,14 @@
 #include "../include/Collision.h"
 #include "../include/Spawner.h"
 
-Game::Game(int SCR_W, int SCR_H){
+Game::Game(int SCR_W, int SCR_H):tdA(0){
     // Set necessary variables first.
     this->running = true;
     this->SCR_W = SCR_W;
     this->SCR_H = SCR_H;
     this->window = nullptr;
     this->renderer = nullptr;
+    
 
     // Gameplay variables.
     this->td = 0;
@@ -37,6 +40,7 @@ Game::Game(int SCR_W, int SCR_H){
 
 // Main Game Loop.
 void Game::update(){
+    std::thread printTimeDeltaThread(&Game::printTimeDeltaEverySecond, this);
     while (this->running){
         // For Calculating Time Delta.
         auto start = std::chrono::high_resolution_clock::now();
@@ -52,9 +56,17 @@ void Game::update(){
             auto tdelta = end - start;
             std::chrono::duration<double, std::milli> ms = tdelta;
             float fps = 1000/ms.count();
-            this->td = ms.count();
+            
+            this->td = ms.count();  // Update Time Delta
+            this->tdA = ms.count();
         }
+        
     } // Main Loop End.
+
+    // Join the print thread before exiting
+    if (printTimeDeltaThread.joinable()) {
+        printTimeDeltaThread.join();
+    }
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -74,7 +86,8 @@ void Game::gameLogic_Collision(){
         
         float centreX = (this->p.getX() + ((float)p.getW() / 2));
         float centreY = (this->p.getY() + ((float)this->p.getH() / 2));
-        Collision::collideTwoPoints(centreX, centreY,this->xMouse, this->yMouse, 2);
+        float threshold = 10 + this->p.getSpeed() * ((this->p.getH() + this->p.getH())/2);
+        Collision::collideTwoPoints(centreX, centreY,this->xMouse, this->yMouse, threshold);
     }
 
     {   // Collision Loop
@@ -220,11 +233,13 @@ void Game::initClasses(){
     // below is wrong. make sure to call the correct one.
     // https://chatgpt.com/share/6766c2d2-fcc8-800b-8fa0-10f80f099a61
     // Player p(this->SCR_W/2, this->SCR_H/2, 20, 20, 0.1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
-    this->p = Player(this->SCR_W/2, this->SCR_H/2, 20, 20, 0.1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
+    this->p = Player(this->SCR_W/2, this->SCR_H/2, 20, 20, 1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
     this->spawner = Spawner(&this->td, &this->SCR_W, &this->SCR_H);
     InputHandler inputHandler;
     std::vector<Entity> entities;
 }
+
+
 
 // Getters
 int Game::getScreenWidth(){
@@ -234,5 +249,20 @@ int Game::getScreenWidth(){
 int Game::getScreenHeight(){
     return this->SCR_H;
 }
+
+void Game::printValue(float value) {
+    std::cout << "Time Delta: " << value << " ms" << std::endl;
+}
+
+void Game::printTimeDeltaEverySecond() {
+    while (this->running) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));  // Sleep for 1 second
+
+        // Directly read the atomic `td` value
+        float currentTDelta = this->tdA.load();  // Load the atomic value
+        this->printValue(currentTDelta);  // Print the time delta
+    }
+}
+
 
 

@@ -1,13 +1,9 @@
-#include <SDL.h>
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keycode.h>
-#include <SDL_render.h>
-#include <SDL_timer.h>
-#include <SDL_video.h>
+// Oliwier Kulczycki
+
 #include "../include/Game.h"
 
-int main() {
 
+int main() {
     Game game(1280, 720);
     game.update();
 

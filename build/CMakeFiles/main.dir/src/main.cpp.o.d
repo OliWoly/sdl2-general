@@ -1,5 +1,6 @@
 CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/oli/Documents/owncode/sdl2-test-1/src/main.cpp \
+  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/Game.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL_main.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL_stdinc.h \
@@ -372,7 +373,6 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Library/Frameworks/SDL2.framework/Headers/SDL_version.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL_locale.h \
   /Library/Frameworks/SDL2.framework/Headers/SDL_misc.h \
-  /Users/oli/Documents/owncode/sdl2-test-1/src/../include/Game.h \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/player.h \
   /Users/oli/Documents/owncode/sdl2-test-1/src/../include/../include/InputHandler.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/vector \
