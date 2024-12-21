@@ -1,18 +1,21 @@
 #include "../include/InputHandler.h"
 #include "../include/player.h"
+#include "../include/Entity.h"
+#include "../include/Spawner.h"
 #include <iostream>
-
-using namespace std;
+#include <vector>
 
 // Emptty constructor. All default values at false.
 InputHandler::InputHandler(){}
 
-void InputHandler::asses(Player *player){
+void InputHandler::asses(Player *player, std::vector<Entity> &entities, Spawner *spawner){
     // Check through all key checking functions.
     check_w_key(player);
     check_a_key(player);
     check_s_key(player);
     check_d_key(player);
+
+    check_e_key(*&player, entities, *&spawner);
 
     check_space_key(player);
 }
@@ -57,11 +60,17 @@ void InputHandler::check_space_key(Player *player){
     }
 }
 
+void InputHandler::check_e_key(Player *player, std::vector<Entity> &entities, Spawner *spawner){
+    if (e_key == true){
+        spawner->spawnEnemies(entities, 1);
+    }
+}
+
 void InputHandler::displayAllCurrentStates(){
-    cout << "W: " << w_key << endl;
-    cout << "A: " << a_key << endl;
-    cout << "S: " << s_key << endl;
-    cout << "D: " << d_key << endl;
+    std::cout << "W: " << w_key << std::endl;
+    std::cout << "A: " << a_key << std::endl;
+    std::cout << "S: " << s_key << std::endl;
+    std::cout << "D: " << d_key << std::endl;
 }
 
 

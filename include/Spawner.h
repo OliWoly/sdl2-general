@@ -12,10 +12,11 @@ private:
     int* screenHeight;
 
 public:
-
+    Spawner() = default;
     Spawner(float* td, int* screenWidth, int* screenHeight);
     void spawnEnemies(std::vector<Entity> &enemies, int numberOfEnemiesToSpawn);
     std::array<float, 4> getRandomEntityConstructorArgs();
+    void removeEnemies(std::vector<Entity> &entity, std::vector<int> indexes);
 };
 
 #endif

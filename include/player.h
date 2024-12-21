@@ -22,6 +22,7 @@ private:
 public:
     // Constructor
     // Must change if adding new instance variables.
+    Player() = default;
     Player(
         int startX, 
         int startY, 

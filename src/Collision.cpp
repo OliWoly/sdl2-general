@@ -7,7 +7,6 @@
 #include "../include/Collision.h"
 
 Collision::Collision(){
-    modifier = 0;
 }
 
 bool Collision::collideTwoPoints(float p1x, float p1y, float p2x, float p2y, float threshold){
@@ -26,7 +25,9 @@ bool Collision::collidePlayer_w_Entity(Player* player, Entity* entity){
         player->getX() + player->getW() > entity->getX() &&
         player->getY() < entity->getY() + entity->getH() &&
         player->getY() + player->getH() > entity->getY()) {
-        return true;
+            int col[4] = {255, 255, 255, 255};
+            entity->setColour(col);
+            return true;
         }
     else {
         return false;

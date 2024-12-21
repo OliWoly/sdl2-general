@@ -10,6 +10,7 @@ public:
     float w;
     float h;
     float* td;
+    int colour [4] = {rand() % 256, rand() % 256, rand() % 256, 255};
 
     // Functions:
     // Class Methods
@@ -21,6 +22,9 @@ public:
     float getY();
     float getW();
     float getH();
+
+    void setColour(int* newColour);
+    static int* chooseRandomColour();
 };
 
 

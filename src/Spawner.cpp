@@ -29,12 +29,27 @@ std::array<float, 4> Spawner::getRandomEntityConstructorArgs(){
     // asses the initial position of the entities.
 
     // rand() is random number generator
-    args[2] = rand() % 50;
-    args[3] = rand() % 50;
+    // + 20 at the end sets the minimum.
+    // maximum is minimum + random variance.
+    args[2] = (rand() % 30) + 20;
+    args[3] = (rand() % 30) + 20;
 
     // now position
     args[0] = rand() % (int)(*this->screenWidth - args[2]);
     args[1] = rand() % (int)(*this->screenHeight - args[3]);
 
     return args;
+}
+
+void Spawner::removeEnemies(std::vector<Entity>& entities, std::vector<int> indexes) {
+    // Sort indexes in ascending order
+    std::sort(indexes.begin(), indexes.end());
+
+    // Remove elements starting from the back
+    for (auto it = indexes.rbegin(); it != indexes.rend(); ++it) {
+        int index = *it;
+        if (index >= 0 && index < entities.size()) { // Ensure index is valid
+            entities.erase(entities.begin() + index);
+        }
+    }
 }
