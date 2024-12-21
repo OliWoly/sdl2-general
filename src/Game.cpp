@@ -16,22 +16,22 @@
 #include "../include/Collision.h"
 #include "../include/Spawner.h"
 
-Game::Game(int SCR_W, int SCR_H):tdA(0){
+Game::Game(int SCR_W, int SCR_H){
     // Set necessary variables first.
     this->running = true;
     this->SCR_W = SCR_W;
     this->SCR_H = SCR_H;
     this->window = nullptr;
     this->renderer = nullptr;
-    
 
     // Gameplay variables.
     this->td = 0;
+    this->tdA = new std::atomic<float>(0);
     this->xMouse = 0;
     this->yMouse = 0;
     this->xMouseG = 0;
     this->yMouseG = 0;
-    this->framerate = 16; // Delay between frames in ms. 16=60fps.
+    this->framerate = 16.6667; // Delay between frames in ms. 16=60fps.
 
     // Init
     this->initEngine();
@@ -47,20 +47,15 @@ void Game::update(){
         this->inputs();
         this->gameLogic();
         this->drawing();
-
-        // Framerate Limiter.
-        SDL_Delay(this->framerate);
+        SDL_Delay(this->framerate - this->td);
+        
 
         {   // For Calculating Time Delta.
             auto end = std::chrono::high_resolution_clock::now();  // End time
             auto tdelta = end - start;
             std::chrono::duration<double, std::milli> ms = tdelta;
-            float fps = 1000/ms.count();
-            
             this->td = ms.count();  // Update Time Delta
-            this->tdA = ms.count();
         }
-        
     } // Main Loop End.
 
     // Join the print thread before exiting
@@ -86,7 +81,7 @@ void Game::gameLogic_Collision(){
         
         float centreX = (this->p.getX() + ((float)p.getW() / 2));
         float centreY = (this->p.getY() + ((float)this->p.getH() / 2));
-        float threshold = 10 + this->p.getSpeed() * ((this->p.getH() + this->p.getH())/2);
+        float threshold = 10 + this->p.getSpeed() * ((float)(this->p.getH() + (float)this->p.getH())/2);
         Collision::collideTwoPoints(centreX, centreY,this->xMouse, this->yMouse, threshold);
     }
 
@@ -198,10 +193,10 @@ void Game::handleKeybaord_KeyDown(SDL_Event* event){
             this->running = false;
         }
         if (event->key.keysym.sym == SDLK_8) {
-            this->framerate = 16;
+            this->framerate = 16.6667;
         }
         if (event->key.keysym.sym == SDLK_9) {
-            this->framerate = 8;
+            this->framerate = 8.3334;
         }
         if (event->key.keysym.sym == SDLK_0) {
             this->framerate = 0;
@@ -251,7 +246,7 @@ int Game::getScreenHeight(){
 }
 
 void Game::printValue(float value) {
-    std::cout << "Time Delta: " << value << " ms" << std::endl;
+    std::cout << value << std::endl;
 }
 
 void Game::printTimeDeltaEverySecond() {
@@ -259,8 +254,9 @@ void Game::printTimeDeltaEverySecond() {
         std::this_thread::sleep_for(std::chrono::seconds(1));  // Sleep for 1 second
 
         // Directly read the atomic `td` value
-        float currentTDelta = this->tdA.load();  // Load the atomic value
-        this->printValue(currentTDelta);  // Print the time delta
+        // TWO ARROWS!
+        float currentTDelta = this->td + this->framerate;  // Load the atomic value
+        this->printValue(1000/currentTDelta);  // Print the time delta
     }
 }
 
