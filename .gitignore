@@ -1,0 +1,8 @@
+.cache
+.vscode
+build/main
+build/.cmake
+build/CMakeFiles
+build/CMakeCache.txt
+build/compile_commands.json
+build/Makefiles
