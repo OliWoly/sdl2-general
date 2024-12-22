@@ -6,4 +6,4 @@ build/.cmake
 build/CMakeFiles
 build/CMakeCache.txt
 build/compile_commands.json
-build/Makefiles
+build/Makefile
