@@ -35,6 +35,18 @@ float Entity::getH() {
     return h;
 }
 
+int* Entity::getColour(){
+    return this->colour;
+}
+
+float Entity::getCentreX(){
+    return this->x + this->w / 2;
+}
+
+float Entity::getCentreY(){
+    return this->y + this->h / 2;
+}
+
 int* Entity::chooseRandomColour(){
     int* rcolour = new int[4];
     rcolour[0] = rand() % 256;

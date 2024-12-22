@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/Game.cpp.o.d"
   "CMakeFiles/main.dir/src/InputHandler.cpp.o"
   "CMakeFiles/main.dir/src/InputHandler.cpp.o.d"
+  "CMakeFiles/main.dir/src/Particle.cpp.o"
+  "CMakeFiles/main.dir/src/Particle.cpp.o.d"
   "CMakeFiles/main.dir/src/Spawner.cpp.o"
   "CMakeFiles/main.dir/src/Spawner.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"

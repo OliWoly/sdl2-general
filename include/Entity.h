@@ -22,6 +22,10 @@ public:
     float getY();
     float getW();
     float getH();
+    int* getColour();
+
+    float getCentreX();
+    float getCentreY();
 
     void setColour(int* newColour);
     static int* chooseRandomColour();

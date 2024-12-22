@@ -225,6 +225,30 @@ src/InputHandler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/InputHandler.cpp.s
 .PHONY : src/InputHandler.cpp.s
 
+src/Particle.o: src/Particle.cpp.o
+.PHONY : src/Particle.o
+
+# target to build an object file
+src/Particle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Particle.cpp.o
+.PHONY : src/Particle.cpp.o
+
+src/Particle.i: src/Particle.cpp.i
+.PHONY : src/Particle.i
+
+# target to preprocess a source file
+src/Particle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Particle.cpp.i
+.PHONY : src/Particle.cpp.i
+
+src/Particle.s: src/Particle.cpp.s
+.PHONY : src/Particle.s
+
+# target to generate assembly for a file
+src/Particle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Particle.cpp.s
+.PHONY : src/Particle.cpp.s
+
 src/Spawner.o: src/Spawner.cpp.o
 .PHONY : src/Spawner.o
 
@@ -318,6 +342,9 @@ help:
 	@echo "... src/InputHandler.o"
 	@echo "... src/InputHandler.i"
 	@echo "... src/InputHandler.s"
+	@echo "... src/Particle.o"
+	@echo "... src/Particle.i"
+	@echo "... src/Particle.s"
 	@echo "... src/Spawner.o"
 	@echo "... src/Spawner.i"
 	@echo "... src/Spawner.s"

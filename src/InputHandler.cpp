@@ -62,7 +62,7 @@ void InputHandler::check_space_key(Player *player){
 
 void InputHandler::check_e_key(Player *player, std::vector<Entity> &entities, Spawner *spawner){
     if (e_key == true){
-        spawner->spawnEnemies(entities, 1000);
+        spawner->spawnEnemies(entities, 1);
     }
 }
 

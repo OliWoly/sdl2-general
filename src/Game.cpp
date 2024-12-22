@@ -15,6 +15,7 @@
 #include "../include/Entity.h"
 #include "../include/Collision.h"
 #include "../include/Spawner.h"
+#include "../include/Particle.h"
 
 Game::Game(int SCR_W, int SCR_H){
     // Set necessary variables first.
@@ -40,7 +41,7 @@ Game::Game(int SCR_W, int SCR_H){
 
 // Main Game Loop.
 void Game::update(){
-    std::thread printTimeDeltaThread(&Game::printTimeDeltaEverySecond, this);
+    std::thread printTimeDeltaThread(&Game::displayDebug, this);
     while (this->running){
         // For Calculating Time Delta.
         auto start = std::chrono::high_resolution_clock::now();
@@ -70,7 +71,26 @@ void Game::update(){
 
 void Game::gameLogic(){
     this->inputHandler.asses(&this->p, this->entities, &this->spawner);
+    this->gameLogic_Movement();
     this->gameLogic_Collision();
+}
+
+void Game::gameLogic_Movement(){
+
+    // Particles
+    // list comprehension does not work here
+    std::vector<int> collidedIndexes;
+    for (int i = 0; i < entityParticles.size(); i++){
+        entityParticles[i].moveExplode(&this->td);
+        entityParticles[i].applyFriction(&this->td);
+
+        entityParticles[i].checkLifetime();
+
+        if (entityParticles[i].getStatus() == false){
+            collidedIndexes.push_back(i);
+        }
+    }
+    spawner.removeParticles(this->entityParticles, collidedIndexes);
 }
 
 void Game::gameLogic_Collision(){
@@ -78,7 +98,6 @@ void Game::gameLogic_Collision(){
     Collision::collidePlayerBoundariesScreen(&this->p, this->SCR_W, this->SCR_H);
     
     {   // Movement by mouse jankyness fix.
-        
         float centreX = (this->p.getX() + ((float)p.getW() / 2));
         float centreY = (this->p.getY() + ((float)this->p.getH() / 2));
         float threshold = 10 + this->p.getSpeed() * ((float)(this->p.getH() + (float)this->p.getH())/2);
@@ -91,16 +110,25 @@ void Game::gameLogic_Collision(){
         int i=0;
 
         for (auto enemy : this->entities){
-            bool toBeRemoved = Collision::collidePlayer_w_Entity(&this->p, &enemy);
+            bool collided = Collision::collidePlayer_w_Entity(&this->p, &enemy);
+            
             
             // Use different ifs for different collion behaviour.
-            if (toBeRemoved){
+            if (collided){
                 collidedIndexes.push_back(i);
             }
             i++;
+
+            {// if function needs singular index.
+                for (int index : collidedIndexes){
+                    spawner.explodeEnemy(&this->entities[index], this->entityParticles, 1);
+                }
+            }
         }
+
+        // Make sure this is the final call.
         this->spawner.removeEnemies(this->entities, collidedIndexes);
-    }
+    }// End collision loop.
 }
 
 void Game::inputs(){
@@ -113,16 +141,22 @@ void Game::inputs(){
 
 void Game::drawing(){
     // Clear screen, also refreshes the draw colour to black.
-
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    
-    // Draw Objects.
-    this->p.draw(this->renderer);
 
+
+    // Draw All Enemies
     for (auto enemy : this->entities){
         enemy.draw(this->renderer);
-    }
+    };
+
+    // Draw Player
+    this->p.draw(this->renderer);
+
+    // Draw All Particles
+    for (auto particle : this->entityParticles){
+        particle.draw(this->renderer);
+    };
 
     // Render Drawn Image.
     SDL_RenderPresent(renderer);
@@ -186,6 +220,10 @@ void Game::handleKeybaord_KeyDown(SDL_Event* event){
         if (event->key.keysym.sym == SDLK_d) {
             this->inputHandler.d_key = true;
         }
+        if (event->key.keysym.sym == SDLK_f) {
+            spawner.spawnEnemies(this->entities, 1);
+        }
+
         if (event->key.keysym.sym == SDLK_F3) {
             this->inputHandler.displayAllCurrentStates();
         }
@@ -232,6 +270,10 @@ void Game::initClasses(){
     this->spawner = Spawner(&this->td, &this->SCR_W, &this->SCR_H);
     InputHandler inputHandler;
     std::vector<Entity> entities;
+    std::vector<Particle> entityParticles;
+
+    
+    
 }
 
 
@@ -245,18 +287,20 @@ int Game::getScreenHeight(){
     return this->SCR_H;
 }
 
-void Game::printValue(float value) {
-    std::cout << value << std::endl;
+void Game::printValue(float value, std::string message) {
+    std::cout << message << value << std::endl;
 }
 
-void Game::printTimeDeltaEverySecond() {
+void Game::displayDebug() {
     while (this->running) {
         std::this_thread::sleep_for(std::chrono::seconds(1));  // Sleep for 1 second
 
         // Directly read the atomic `td` value
         // TWO ARROWS!
         float currentTDelta = this->td + this->framerate;  // Load the atomic value
-        this->printValue(1000/currentTDelta);  // Print the time delta
+        this->printValue(1000/currentTDelta, "FPS: ");  // Print the time delta
+        this->printValue(this->entities.size(), "Enemies #: ");
+        this->printValue(this->entityParticles.size(), "Entity Particles #: ");
     }
 }
 

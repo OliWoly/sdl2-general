@@ -5,6 +5,7 @@
 #include "../include/InputHandler.h"
 #include "../include/Entity.h"
 #include "../include/Spawner.h"
+#include "../include/Particle.h"
 
 class Game{
 private:
@@ -19,6 +20,7 @@ private:
     Spawner spawner;
     InputHandler inputHandler;
     std::vector<Entity> entities;
+    std::vector<Particle> entityParticles;
 
     SDL_Event event;
 
@@ -46,6 +48,7 @@ public:
     void update();
     void gameLogic();
     void gameLogic_Collision();
+    void gameLogic_Movement();
 
     void inputs();
 
@@ -54,8 +57,8 @@ public:
     int getScreenWidth();
     int getScreenHeight();
 
-    void printValue(float value);
-    void printTimeDeltaEverySecond();
+    void printValue(float value, std::string message);
+    void displayDebug();
 };
 
 
