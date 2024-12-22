@@ -1,5 +1,6 @@
 .cache
 .vscode
+.DS_Store
 build/main
 build/.cmake
 build/CMakeFiles
