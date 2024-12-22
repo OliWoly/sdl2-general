@@ -21,6 +21,8 @@ public:
     void explodeEnemy(Entity* entity, std::vector<Particle> &particles, int particleSize);
     void spawnParticle(std::vector<Particle>& particles, int x, int y, int size, const std::array<int, 4>& colour, float originX, float originY);
     void removeParticles(std::vector<Particle>& particles, std::vector<int> indexes);
+
+    void displayInstanceVariables();
 };
 
 #endif

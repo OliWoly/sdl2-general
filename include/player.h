@@ -19,6 +19,9 @@ private:
     int* mouseXL;
     int* mouseYL;
 
+    float mouseModX;
+    float mouseModY;
+
 public:
     // Constructor
     // Must change if adding new instance variables.
@@ -34,7 +37,10 @@ public:
         int* mousePosXGlobal,
         int* mousePosYGlobal,
         int* mousePosXLocal,
-        int* mousePosYLocal
+        int* mousePosYLocal,
+
+        float mouseModX,
+        float mouseModY
         );
 
     // Modifiers

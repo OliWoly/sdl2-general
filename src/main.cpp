@@ -4,7 +4,7 @@
 
 
 int main() {
-    Game game(1280, 720);
+    Game game(800, 450);
     game.update();
 
     return 0;

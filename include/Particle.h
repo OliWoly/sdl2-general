@@ -14,6 +14,7 @@ private:
 
     float friction;
     float speed;
+    float gravity;
 
     bool alive;
     float lifetime;
@@ -28,6 +29,7 @@ public:
     void applyFriction(float* td);
     float getX();
     bool getStatus();
+    void applyGravity(float* td);
 
     void displayCoordinates();
 

@@ -83,6 +83,7 @@ void Game::gameLogic_Movement(){
     for (int i = 0; i < entityParticles.size(); i++){
         entityParticles[i].moveExplode(&this->td);
         entityParticles[i].applyFriction(&this->td);
+        entityParticles[i].applyGravity(&this->td);
 
         entityParticles[i].checkLifetime();
 
@@ -121,7 +122,7 @@ void Game::gameLogic_Collision(){
 
             {// if function needs singular index.
                 for (int index : collidedIndexes){
-                    spawner.explodeEnemy(&this->entities[index], this->entityParticles, 1);
+                    spawner.explodeEnemy(&this->entities[index], this->entityParticles, 3);
                 }
             }
         }
@@ -256,6 +257,12 @@ void Game::initEngine(){
         return;
     }
 
+    int logicalWidth = 1920; // Define your logical width
+    int logicalHeight = 1080; // Define your logical height
+
+    this->windowLogicalSizeModifierDifferenceWidth = (float)logicalWidth/SCR_W;
+    this->windowLogicalSizeModifierDifferenceHeight = (float)logicalHeight/SCR_H;
+    SDL_RenderSetLogicalSize(renderer, logicalWidth, logicalHeight);
     // event handler variable
     SDL_Event event;
 }
@@ -266,7 +273,7 @@ void Game::initClasses(){
     // below is wrong. make sure to call the correct one.
     // https://chatgpt.com/share/6766c2d2-fcc8-800b-8fa0-10f80f099a61
     // Player p(this->SCR_W/2, this->SCR_H/2, 20, 20, 0.1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
-    this->p = Player(this->SCR_W/2, this->SCR_H/2, 20, 20, 1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
+    this->p = Player(this->SCR_W/2, this->SCR_H/2, 20, 20, 1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse, this->windowLogicalSizeModifierDifferenceWidth, this->windowLogicalSizeModifierDifferenceHeight);
     this->spawner = Spawner(&this->td, &this->SCR_W, &this->SCR_H);
     InputHandler inputHandler;
     std::vector<Entity> entities;

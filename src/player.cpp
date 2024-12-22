@@ -22,7 +22,10 @@ Player::Player(
     int* mousePosXGlobal,
     int* mousePosYGlobal,
     int* mousePosXLocal,
-    int* mousePosYLocal
+    int* mousePosYLocal,
+
+    float mouseModifX,
+    float mouseModifY
     ) 
     {
         x = startX;
@@ -36,6 +39,10 @@ Player::Player(
         mouseYG = mousePosYGlobal;
         mouseXL = mousePosXLocal;
         mouseYL = mousePosYLocal;
+
+        mouseModX = mouseModifX;
+        mouseModY = mouseModifY;
+        
     }
 
 void Player::draw(SDL_Renderer* renderer){
@@ -48,7 +55,7 @@ void Player::moveToMouse(float stepSize = 0){
     float centreX = (float)x + ((float)w/2);
     float centreY = (float)y + ((float)h/2);
     // Angle in radians
-    float angle = atan2((float)*mouseYL - centreY, (float)*mouseXL - centreX);
+    float angle = atan2((float)(*mouseYL * this->mouseModX) - centreY, (float)(*mouseXL * this->mouseModY) - centreX);
 
     // Only move if the mouse is a threshold distance away from the player.
     // Makes sure to not cause jankiness.

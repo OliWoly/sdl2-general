@@ -39,6 +39,9 @@ private:
     void handleKeybaord(SDL_Event* event);
     void handleKeybaord_KeyDown(SDL_Event* event);
     void handleKeybaord_KeyUp(SDL_Event* event);
+
+    float windowLogicalSizeModifierDifferenceWidth;
+    float windowLogicalSizeModifierDifferenceHeight;
     
 
 public:

@@ -84,3 +84,9 @@ void Spawner::explodeEnemy(Entity* entity, std::vector<Particle> &particles, int
         }
     }
 }
+
+void Spawner::displayInstanceVariables(){
+    std::cout << this->td << std::endl;
+    std::cout << this->screenWidth << std::endl;
+    std::cout << this->screenHeight << std::endl;
+}

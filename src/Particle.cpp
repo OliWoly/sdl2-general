@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include "../include/Particle.h"
 
+const float INITIAL_GRAVITY = 0.01;
+
 Particle::Particle(float x, float y, float size, const std::array<int, 4>& colour, float originX, float originY){
     this->x = x;
     this->y = y;
@@ -12,10 +14,12 @@ Particle::Particle(float x, float y, float size, const std::array<int, 4>& colou
     this->colour = colour;
     this->originX = originX;
     this->originY = originY;
+    
 
     
     this->speed = (std::sqrt(pow(this->x-this->originX, 2) + pow(this->y-this->originY, 2))/1000) * 10;
-    this->friction = this->speed/60;
+    this->friction = this->speed/600;
+    this->gravity = INITIAL_GRAVITY;
 
     this->alive = true;
     // Floor 10, Ceiling 20, Final: 1-2
@@ -52,10 +56,15 @@ void Particle::moveExplode(float* td) {
 }
 
 void Particle::applyFriction(float* td){
-    this->speed -= this->friction;
+    this->speed -= this->friction * *td;
     if (this->speed < 0){
         this->speed = 0;
     }
+}
+
+void Particle::applyGravity(float* td){
+    this->y += this->gravity * *td;
+    this->gravity += INITIAL_GRAVITY/3 * *td;
 }
 
 float Particle::getX(){
