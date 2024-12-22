@@ -7,3 +7,6 @@ build/CMakeFiles
 build/CMakeCache.txt
 build/compile_commands.json
 build/Makefile
+build/.DS_Store
+build/cmake_install.cmake
+
