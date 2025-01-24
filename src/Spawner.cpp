@@ -1,8 +1,8 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include <SDL.h>
-#include <array>
+#include <algorithm>
+#include <SDL2/SDL.h>
 #include "../include/Particle.h"
 #include "../include/Spawner.h"
 #include "../include/Entity.h"

@@ -1,7 +1,8 @@
 #ifndef PARTICLE_H // essentially pragma once.
 #define PARTICLE_H
 #include <array>
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#include <chrono>
 
 class Particle {
 private:

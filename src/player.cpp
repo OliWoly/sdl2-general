@@ -1,5 +1,5 @@
-#include <SDL.h>
-#include <SDL_render.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 #include "../include/player.h"
 #include "../include/Collision.h"
 #include <iostream>

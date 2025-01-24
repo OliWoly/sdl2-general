@@ -1,6 +1,6 @@
-#ifndef ENTITY_H // essetntally pragma once.
+#ifndef ENTITY_H
 #define ENTITY_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 
 class Entity {

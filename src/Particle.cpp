@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <cmath>
 #include <cstdlib>
 #include "../include/Particle.h"
