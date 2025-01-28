@@ -1,5 +1,8 @@
 #ifndef GAME_H // essetntally pragma once.
 #define GAME_H
+#include <atomic>
+#include <string>
+
 #include <SDL2/SDL.h>
 #include "../include/player.h"
 #include "../include/InputHandler.h"

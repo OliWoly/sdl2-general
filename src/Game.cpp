@@ -45,14 +45,10 @@ void Game::update(){
         // For Calculating Time Delta.
         auto start = std::chrono::high_resolution_clock::now();
         this->inputs();
-        std::thread gameLogicThread(&Game::gameLogic, this);
-        std::thread drawThread(&Game::drawing, this);
+        this->gameLogic();
+        this->drawing();
         
-
-        gameLogicThread.join();
-        drawThread.join();
-        
-        SDL_Delay(this->framerate);
+        //SDL_Delay(this->framerate);
         {   // For Calculating Time Delta.
             auto end = std::chrono::high_resolution_clock::now();  // End time
             auto tdelta = end - start;
@@ -72,11 +68,8 @@ void Game::update(){
 }
 
 void Game::gameLogic(){
-    std::thread movementThread(&Game::gameLogic_Movement, this);
-    std::thread collisionThread(&Game::gameLogic_Collision, this);
-
-    collisionThread.join();
-    movementThread.join();
+    this->gameLogic_Movement();
+    this->gameLogic_Collision();
 }
 
 void Game::gameLogic_Movement(){
