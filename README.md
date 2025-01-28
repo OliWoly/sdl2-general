@@ -1,8 +1,5 @@
 # SDL2 General
-
 An example/template of using SDL2 on macos.
-
-***
 
 ## To Do:
 - MultiPlatform

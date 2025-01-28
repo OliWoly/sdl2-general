@@ -1,14 +1,14 @@
 #include <iostream>
-#include <SDL.h>
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keycode.h>
-#include <SDL_render.h>
-#include <SDL_timer.h>
-#include <SDL_video.h>
 #include <vector>
 #include <thread>
 #include <chrono>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_video.h>
 #include "../include/Game.h"
 #include "../include/player.h"
 #include "../include/InputHandler.h"
@@ -27,7 +27,6 @@ Game::Game(int SCR_W, int SCR_H){
 
     // Gameplay variables.
     this->td = 0;
-    this->tdA = new std::atomic<float>(0);
     this->xMouse = 0;
     this->yMouse = 0;
     this->xMouseG = 0;
@@ -46,11 +45,14 @@ void Game::update(){
         // For Calculating Time Delta.
         auto start = std::chrono::high_resolution_clock::now();
         this->inputs();
-        this->gameLogic();
-        this->drawing();
-        SDL_Delay(this->framerate - this->td);
+        std::thread gameLogicThread(&Game::gameLogic, this);
+        std::thread drawThread(&Game::drawing, this);
         
 
+        gameLogicThread.join();
+        drawThread.join();
+        
+        SDL_Delay(this->framerate);
         {   // For Calculating Time Delta.
             auto end = std::chrono::high_resolution_clock::now();  // End time
             auto tdelta = end - start;
@@ -70,33 +72,24 @@ void Game::update(){
 }
 
 void Game::gameLogic(){
-    this->inputHandler.asses(&this->p, this->entities, &this->spawner);
-    this->gameLogic_Movement();
-    this->gameLogic_Collision();
+    std::thread movementThread(&Game::gameLogic_Movement, this);
+    std::thread collisionThread(&Game::gameLogic_Collision, this);
+
+    collisionThread.join();
+    movementThread.join();
 }
 
 void Game::gameLogic_Movement(){
-
+    // Player
+    this->inputHandler.asses(&this->p, this->entities, &this->spawner);
+    
     // Particles
-    // list comprehension does not work here
-    std::vector<int> collidedIndexes;
-    for (int i = 0; i < entityParticles.size(); i++){
-        entityParticles[i].moveExplode(&this->td);
-        entityParticles[i].applyFriction(&this->td);
-        entityParticles[i].applyGravity(&this->td);
-
-        entityParticles[i].checkLifetime();
-
-        if (entityParticles[i].getStatus() == false){
-            collidedIndexes.push_back(i);
-        }
-    }
-    spawner.removeParticles(this->entityParticles, collidedIndexes);
+    this->particleMovement();
 }
 
 void Game::gameLogic_Collision(){
     // Play boundaries.
-    Collision::collidePlayerBoundariesScreen(&this->p, this->SCR_W, this->SCR_H);
+    Collision::collidePlayerBoundariesScreen(&this->p, this->L_SCR_W, this->L_SCR_H);
     
     {   // Movement by mouse jankyness fix.
         float centreX = (this->p.getX() + ((float)p.getW() / 2));
@@ -122,7 +115,7 @@ void Game::gameLogic_Collision(){
 
             {// if function needs singular index.
                 for (int index : collidedIndexes){
-                    spawner.explodeEnemy(&this->entities[index], this->entityParticles, 3);
+                    spawner.explodeEnemy(&this->entities[index], this->entityParticles, 7);
                 }
             }
         }
@@ -161,6 +154,19 @@ void Game::drawing(){
 
     // Render Drawn Image.
     SDL_RenderPresent(renderer);
+}
+
+void Game::particleMovement(){
+    // list comprehension does not work here
+    std::vector<int> collidedIndexes;
+    for (int i = 0; i < entityParticles.size(); i++){
+        entityParticles[i].update(&td);
+
+        if (entityParticles[i].getStatus() == false){
+            collidedIndexes.push_back(i);
+        }
+    }
+    spawner.removeParticles(this->entityParticles, collidedIndexes);
 }
 
 // inputs helpers
@@ -257,12 +263,13 @@ void Game::initEngine(){
         return;
     }
 
-    int logicalWidth = 1920; // Define your logical width
-    int logicalHeight = 1080; // Define your logical height
+    this->L_SCR_W = 1920; // Define your logical width
+    this->L_SCR_H = 1080; // Define your logical height
 
-    this->windowLogicalSizeModifierDifferenceWidth = (float)logicalWidth/SCR_W;
-    this->windowLogicalSizeModifierDifferenceHeight = (float)logicalHeight/SCR_H;
-    SDL_RenderSetLogicalSize(renderer, logicalWidth, logicalHeight);
+    this->windowLogicalSizeModifierDifferenceWidth = (float)this->L_SCR_W/SCR_W;
+    this->windowLogicalSizeModifierDifferenceHeight = (float)this->L_SCR_H/SCR_H;
+    SDL_RenderSetLogicalSize(renderer, this->L_SCR_W, this->L_SCR_H);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     // event handler variable
     SDL_Event event;
 }
@@ -274,7 +281,7 @@ void Game::initClasses(){
     // https://chatgpt.com/share/6766c2d2-fcc8-800b-8fa0-10f80f099a61
     // Player p(this->SCR_W/2, this->SCR_H/2, 20, 20, 0.1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse);
     this->p = Player(this->SCR_W/2, this->SCR_H/2, 20, 20, 1, &this->td, &this->xMouseG, &this->yMouseG, &this->xMouse, &this->yMouse, this->windowLogicalSizeModifierDifferenceWidth, this->windowLogicalSizeModifierDifferenceHeight);
-    this->spawner = Spawner(&this->td, &this->SCR_W, &this->SCR_H);
+    this->spawner = Spawner(&this->td, &this->L_SCR_W, &this->L_SCR_H);
     InputHandler inputHandler;
     std::vector<Entity> entities;
     std::vector<Particle> entityParticles;

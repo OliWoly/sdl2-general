@@ -3,7 +3,7 @@
 #include <vector>
 #include "../include/Entity.h"
 #include "../include/Particle.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 
 class Spawner{

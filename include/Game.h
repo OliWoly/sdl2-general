@@ -1,6 +1,6 @@
 #ifndef GAME_H // essetntally pragma once.
 #define GAME_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "../include/player.h"
 #include "../include/InputHandler.h"
 #include "../include/Entity.h"
@@ -40,6 +40,12 @@ private:
     void handleKeybaord_KeyDown(SDL_Event* event);
     void handleKeybaord_KeyUp(SDL_Event* event);
 
+    // Logical window size. (used for scaling).
+    int L_SCR_W;
+    int L_SCR_H;
+
+    // Difference between logical and real window size as modifier
+    // e.g 1.33x size diff.
     float windowLogicalSizeModifierDifferenceWidth;
     float windowLogicalSizeModifierDifferenceHeight;
     
@@ -52,6 +58,7 @@ public:
     void gameLogic();
     void gameLogic_Collision();
     void gameLogic_Movement();
+    void particleMovement();
 
     void inputs();
 

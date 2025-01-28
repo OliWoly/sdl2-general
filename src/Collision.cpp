@@ -1,7 +1,7 @@
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_hints.h>
 #include <iostream>
 #include <math.h>
-#include <SDL.h>
-#include <SDL2/SDL_hints.h>
 #include "../include/player.h"
 #include "../include/Entity.h"
 #include "../include/Collision.h"

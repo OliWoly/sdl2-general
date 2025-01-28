@@ -1,5 +1,5 @@
-#include <SDL.h>
-#include <SDL_render.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 #include "../include/player.h"
 #include "../include/Collision.h"
 #include <iostream>
@@ -11,38 +11,20 @@ using namespace std;
 // Controls isntance variables and default values when calling the function.
 // When assigning new instance variables which are determined on
 // construction, must change the constructor call in the header file too.
-Player::Player(
-    int startX, 
-    int startY, 
-    int startW, 
-    int startH,
-    float startSpeed,
-    float* initialTD,
-    
-    int* mousePosXGlobal,
-    int* mousePosYGlobal,
-    int* mousePosXLocal,
-    int* mousePosYLocal,
+Player::Player(int x, int y, int w, int h, float speed, float* td, int* mouseXG, int* mousYG, int* mouseXL, int* mouseYL, float mouseModX, float mouseModY){
+        this->x = x;
+        this->y = y;
+        this->w = w;
+        this->h = h;
+        this->speed = speed;
+        this->td = td;
 
-    float mouseModifX,
-    float mouseModifY
-    ) 
-    {
-        x = startX;
-        y = startY;
-        w = startW;
-        h = startH;
-        speed = startSpeed;
-        td = initialTD;
-
-        mouseXG = mousePosXGlobal;
-        mouseYG = mousePosYGlobal;
-        mouseXL = mousePosXLocal;
-        mouseYL = mousePosYLocal;
-
-        mouseModX = mouseModifX;
-        mouseModY = mouseModifY;
-        
+        this->mouseXG = mouseXG;
+        this->mouseYG = mouseYG;
+        this->mouseXL = mouseXL;
+        this->mouseYL = mouseYL;
+        this->mouseModX = mouseModX;
+        this->mouseModY = mouseModY;
     }
 
 void Player::draw(SDL_Renderer* renderer){
@@ -55,7 +37,7 @@ void Player::moveToMouse(float stepSize = 0){
     float centreX = (float)x + ((float)w/2);
     float centreY = (float)y + ((float)h/2);
     // Angle in radians
-    float angle = atan2((float)(*mouseYL * this->mouseModX) - centreY, (float)(*mouseXL * this->mouseModY) - centreX);
+    float angle = atan2((float)(*mouseYL * this->mouseModY) - centreY, (float)(*mouseXL * this->mouseModX) - centreX);
 
     // Only move if the mouse is a threshold distance away from the player.
     // Makes sure to not cause jankiness.
@@ -68,8 +50,8 @@ void Player::moveToMouse(float stepSize = 0){
     // Avoid too big movements and floors them to distance between points.
     else{
         // Just move to mouse
-        x = *mouseXL + (x-centreX);
-        y = *mouseYL + (y-centreY);
+        x = *this->mouseXL;
+        y = *this->mouseYL;
     }
 }
 

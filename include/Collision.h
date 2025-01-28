@@ -1,6 +1,6 @@
 #ifndef COLLISION_H // essetntally pragma once.
 #define COLLISION_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "../include/player.h"
 #include "../include/Entity.h"
 

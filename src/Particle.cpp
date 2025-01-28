@@ -1,11 +1,11 @@
 #include <iostream>
 #include <chrono>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <cmath>
 #include <cstdlib>
 #include "../include/Particle.h"
 
-const float INITIAL_GRAVITY = 0.01;
+const float INITIAL_GRAVITY = 0.001;
 
 Particle::Particle(float x, float y, float size, const std::array<int, 4>& colour, float originX, float originY){
     this->x = x;
@@ -15,10 +15,8 @@ Particle::Particle(float x, float y, float size, const std::array<int, 4>& colou
     this->originX = originX;
     this->originY = originY;
     
-
-    
-    this->speed = (std::sqrt(pow(this->x-this->originX, 2) + pow(this->y-this->originY, 2))/1000) * 10;
-    this->friction = this->speed/600;
+    this->speed = 1;
+    this->friction = 0.001;
     this->gravity = INITIAL_GRAVITY;
 
     this->alive = true;
@@ -36,10 +34,19 @@ void Particle::draw(SDL_Renderer* renderer){
     SDL_RenderFillRect(renderer, &rect);
 }
 
+void Particle::update(float* td){
+    this->checkLifetime();
+    this->moveExplode(td);
+    this->applyFriction(td);
+    this->applyGravity(td);
+    this->applyAlphaChange();
+}
+
 void Particle::checkLifetime(){
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> duration = end - this->birth;
-    if (duration.count() >= this->lifetime){
+    this->age = duration.count();
+    if (this->age >= this->lifetime){
         this->alive = false;
     }
     else{
@@ -65,6 +72,21 @@ void Particle::applyFriction(float* td){
 void Particle::applyGravity(float* td){
     this->y += this->gravity * *td;
     this->gravity += INITIAL_GRAVITY/3 * *td;
+}
+
+void Particle::applyAlphaChange(){
+    // must run after checkLifetime.
+    float lifetimePercentage = this->age / this->lifetime * 100;
+    float newAlpha = 255 - (float)255/100 * lifetimePercentage;
+
+    // Value clipping.
+    if (newAlpha > 255){
+        newAlpha = 255;
+    }
+    if (newAlpha < 0){
+        newAlpha = 0;
+    }
+    this->colour[3] = (int)newAlpha;
 }
 
 float Particle::getX(){

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <array>
 #include "../include/Particle.h"
 #include "../include/Spawner.h"
