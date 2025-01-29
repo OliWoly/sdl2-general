@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(sdl2-snake VERSION 1.0)
 
 # Find SDL2 using Homebrew's path on Apple Silicon
-set(CMAKE_PREFIX_PATH "/opt/homebrew")
+# set(CMAKE_PREFIX_PATH "/opt/homebrew")
+set(CMAKE_PREFIX_PATH "/usr/include")
 find_package(SDL2 REQUIRED)
 
 
