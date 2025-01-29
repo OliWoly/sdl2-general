@@ -6,3 +6,5 @@ An example/template of using SDL2 on macos.
 - Fix Resolution Independance
 - Add collision with enemies
 - Add shooting
+
+Made a change testing git
